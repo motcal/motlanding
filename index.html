@@ -14,7 +14,6 @@
       margin: 0;
       padding: 0;
       width: 100%;
-      height: 100%;
       background-color: black;
       color: white;
       font-family: monospace;
@@ -31,6 +30,7 @@
     .header {
       font-size: min(1.1vw, 1.1vh);
       font-weight: bold;
+      margin-top: 20vh;
       margin-bottom: 2vh;
       z-index: 10;
       background-color: rgba(0, 0, 0, 0.8);
@@ -45,6 +45,7 @@
     @media (max-width: 1000px) {
       .header {
         font-size: min(.95vw, .95vh);
+        margin-top: 12vh;
       }
       .content {
         font-size: min(3vw, 3vh);
@@ -168,6 +169,15 @@
     /********************************************************
      * Beam creation & helper functions
      ********************************************************/
+    document.body.addEventListener("click", function (evt) {
+      const x = evt.clientX;
+      const y = evt.clientY;
+      // Create a new beam right where user clicked
+      const newBeam = createBeamAt(x, y);
+      // Add it to the global array so it moves/animates
+      beams.push(newBeam);
+    });
+
     function createBeam() {
       // 1) Randomly pick one of the four edges
       const edge = Math.floor(Math.random() * 4);
@@ -217,6 +227,13 @@
         angleDeg,
         diffractionTimeout: null
       };
+    }
+
+    function createBeamAt(x, y) {
+      const beam = createBeam();
+      beam.x = x;
+      beam.y = y;
+      return beam;
     }
 
     // Returns a random angle (in degrees) that keeps the beam traveling inward
