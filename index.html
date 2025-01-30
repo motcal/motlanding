@@ -2,56 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" 
+        content="width=device-width, 
+                 initial-scale=1.0, 
+                 maximum-scale=1.0, 
+                 user-scalable=no">
   <link rel="icon" type="image/png" href="mesh.png">
   <title>Mesh Optical Technologies</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      height: 100%;
       background-color: black;
       color: white;
       font-family: monospace;
+    }
+    body {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Ensures everything fits in one screen */
       text-align: center;
-      overflow: hidden; /* Avoid scrollbars during animation */
+      overflow: hidden;
     }
     .header {
-      max-width: 70%;
-      font-size: 0.5rem;
+      font-size: 0.7rem;
       font-weight: bold;
       margin-bottom: 30px;
       z-index: 10;
-      background-color: rgba(0, 0, 0, 0.8); /* Black with 50% opacity */;
+      background-color: rgba(0, 0, 0, 0.8);
     }
     .content {
       max-width: 60%;
-      font-size: 1.0rem; /* Default text size */
+      font-size: 1.2rem;
       line-height: 1.6;
       z-index: 10;
-      background-color: rgba(0, 0, 0, 0.85); /* Black with 50% opacity */;
+      background-color: rgba(0, 0, 0, 0.85);
     }
     @media (max-width: 1000px) {
       .header {
-        font-size: .18rem; /* Smaller header on mobile */
+        font-size: .18rem;
       }
       .content {
         font-size: 0.7rem; 
       }
     }
-    /* Laser styling */
     .laser {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 1; /* Behind header/content */
+      z-index: 1;
       color: white;
-      white-space: nowrap; /* Keep text in one line */
-      transform-origin: left center; /* Rotate around the left edge for convenience */
+      white-space: nowrap;
+      transform-origin: left center;
     }
   </style>
 </head>
@@ -83,10 +88,9 @@
 
   <!-- Centered Body Text -->
   <div class="content" id="content">
-    Mesh Optical Technologies designs and manufactures the world's most advanced optical computing hardware.
-    Our mission is to advance technology through mastery of the photon.<br><br>
+    Mesh Optical Technologies designs and manufactures the world's most advanced optical computing hardware.<br><br>
 
-    We believe in engineering our hardware, the machines that make them, and the software that controls them, to the limit of physics.<br><br>
+    We believe in engineering to the limit of physics, building our own factories, and writing software that mazimizes the capability of our hardware.<br><br>
 
     If you are interested in helping us build our first factory in Los Angeles, please send your resume to join at meshoptical dot com.
   </div>
@@ -103,9 +107,8 @@
       "~ ~ ~ ~ ~ ~",
       ". . . . . .",
     ];
-    const TYPING_SPEED = 70;          // ms per character
+    const TYPING_SPEED = 70; // ms per character
     const CROSSING_TIME = 7; // seconds to cross screen width (approx.)
-    // If you want them to move faster/slower, change CROSSING_TIME.
 
     /********************************************************
      * Globals & Initialization
@@ -117,7 +120,7 @@
     const contentEl = document.getElementById("content");
 
     // Keep track of all beams in an array
-    const beams = [];
+    beams = [];
 
     // Compute speed (pixels per frame) to cross screen in ~ CROSSING_TIME
     function getSpeed() {
@@ -139,6 +142,18 @@
         beam.dx = s * Math.cos(angleRad);
         beam.dy = s * Math.sin(angleRad);
       }
+
+      // Clear existing beams
+      for (let beam of beams) {
+        beam.element.remove();
+      }
+      beams = [];
+
+      // Recreate beams
+      for (let i = 0; i < numBeams; i++) {
+        beams.push(createBeam());
+      }
+
     });
 
     // Create the beams
@@ -155,6 +170,7 @@
     function createBeam() {
       // 1) Randomly pick one of the four edges
       const edge = Math.floor(Math.random() * 4);
+
       // 2) Random angle in the correct range for that edge
       const angleDeg = randomAngleForEdge(edge);
 
@@ -192,7 +208,7 @@
       let dx = getSpeed() * Math.cos(angleRad);
       let dy = getSpeed() * Math.sin(angleRad);
 
-      // Return the beam object
+      // 7) Return the beam object
       return {
         element: laserEl,
         x, y,        // current position
@@ -314,9 +330,7 @@
         beam.diffractionTimeout = setTimeout(() => {
           typeDiffraction(beam, text, index + 1);
         }, TYPING_SPEED);
-      } 
-      // else: we've finished typing. You could add logic here to revert
-      // to the original `startingLaserText` after some delay if desired.
+      }
     }
 </script>
 
