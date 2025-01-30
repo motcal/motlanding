@@ -95,7 +95,6 @@
      * Configuration
      ********************************************************/
     const numBeams = 6;                // Number of laser beams
-    const speed = 2.5;                 // Pixels per animation frame
     const startingLaserText = "⬡";  // Starting laser trail
     const diffractionPatterns = [
       "/\\/\\/\\/\\/\\/",
@@ -104,6 +103,8 @@
       ". . . . . .",
     ];
     const TYPING_SPEED = 70;          // ms per character
+    const CROSSING_TIME = 7; // seconds to cross screen width (approx.)
+    // If you want them to move faster/slower, change CROSSING_TIME.
 
     /********************************************************
      * Globals & Initialization
@@ -114,14 +115,30 @@
     const headerEl = document.getElementById("header");
     const contentEl = document.getElementById("content");
 
-    // Update screen dimensions on resize
+    // Keep track of all beams in an array
+    const beams = [];
+
+    // Compute speed (pixels per frame) to cross screen in ~ CROSSING_TIME
+    function getSpeed() {
+      // 60 frames/second * CROSSING_TIME = total frames
+      // distance = screen width
+      // speed = distance / frames
+      return width / (60 * CROSSING_TIME);
+    }
+
+    // Update screen dimensions and recalc beam velocities on resize
     window.addEventListener("resize", () => {
       width  = window.innerWidth;
       height = window.innerHeight;
-    });
 
-    // Keep track of all beams in an array
-    const beams = [];
+      // Recompute and update speed for each beam
+      for (let beam of beams) {
+        let angleRad = Math.atan2(beam.dy, beam.dx);
+        let s = getSpeed();
+        beam.dx = s * Math.cos(angleRad);
+        beam.dy = s * Math.sin(angleRad);
+      }
+    });
 
     // Create the beams
     for (let i = 0; i < numBeams; i++) {
@@ -171,8 +188,8 @@
       }
 
       // 6) Compute velocity from angle + speed
-      let dx = speed * Math.cos(angleRad);
-      let dy = speed * Math.sin(angleRad);
+      let dx = getSpeed() * Math.cos(angleRad);
+      let dy = getSpeed() * Math.sin(angleRad);
 
       // Return the beam object
       return {
