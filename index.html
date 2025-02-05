@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" 
-        content="width=device-width, 
-                 initial-scale=1.0, 
-                 maximum-scale=1.0, 
-                 user-scalable=no">
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="icon" type="image/png" href="mesh.png">
   <title>Mesh Optical Technologies</title>
   <style>
@@ -14,9 +11,11 @@
       margin: 0;
       padding: 0;
       width: 100%;
+      height: 100vh;
       background-color: black;
       color: white;
       font-family: monospace;
+      overflow: hidden;
     }
     body {
       display: flex;
@@ -24,13 +23,10 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow-x: hidden;
-      overflow-y: auto;
     }
     .header {
       font-size: min(1.1vw, 1.1vh);
       font-weight: bold;
-      margin-top: 20vh;
       margin-bottom: 2vh;
       z-index: 10;
       background-color: rgba(0, 0, 0, 0.8);
@@ -45,17 +41,24 @@
     @media (max-width: 1000px) {
       .header {
         font-size: min(.95vw, .95vh);
-        margin-top: 12vh;
       }
       .content {
         font-size: min(3vw, 3vh);
       }
     }
+    #laserContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
     .laser {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 1;
       color: white;
       white-space: nowrap;
       transform-origin: left center;
@@ -63,28 +66,28 @@
   </style>
 </head>
 <body>
+  <div id="laserContainer"></div>
 
   <!-- Header Text -->
   <div class="header" id="header">
     <pre>
-
-░▒▓██████████████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░▒▓█▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓███████▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░░▒▓████████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓████████▓▒░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓█▓▒░        ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░ 
-                                                                                                                                                       
-                                                                                                                                                       
-░▒▓████████▓▒░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓███████▓▒░   
-   ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░          
-   ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░          
-   ░▒▓█▓▒░   ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒▒▓███▓▒░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░    
-   ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░   
-   ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░   
-   ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓███████▓▒░    
-                                                                                                                                                                                                                                                                                            
+  ░▒▓██████████████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░▒▓█▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓███████▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░        
+  ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
+  ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
+  ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░░▒▓████████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓████████▓▒░▒▓█▓▒░        
+  ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
+  ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
+  ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░       ░▒▓██████▓▒░░▒▓█▓▒░        ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░ 
+                                                                                                                                                        
+                                                                                                                                                        
+  ░▒▓████████▓▒░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓███████▓▒░   
+    ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░          
+    ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░          
+    ░▒▓█▓▒░   ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒▒▓███▓▒░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░    
+    ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░   
+    ░▒▓█▓▒░   ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░   
+    ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓███████▓▒░    
+                                                                                                                                                                                                                                                                                   
     </pre>
   </div>
 
@@ -102,15 +105,16 @@
      * Configuration
      ********************************************************/
     const numBeams = 6;                // Number of laser beams
-    const startingLaserText = "⬡";  // Starting laser trail
+    const startingLaserText = "⬡";     // Starting laser trail
     const diffractionPatterns = [
       "/\\/\\/\\/\\/\\/",
       "- - - - - -",
       "~ ~ ~ ~ ~ ~",
       ". . . . . .",
+      "⬡",
     ];
     const TYPING_SPEED = 70; // ms per character
-    const CROSSING_TIME = 7; // seconds to cross screen width (approx.)
+    const CROSSING_TIME = 7; // seconds to cross screen width
 
     /********************************************************
      * Globals & Initialization
@@ -120,9 +124,9 @@
 
     const headerEl = document.getElementById("header");
     const contentEl = document.getElementById("content");
+    const laserContainer = document.getElementById("laserContainer");
 
-    // Keep track of all beams in an array
-    beams = [];
+    let beams = [];
 
     // Compute speed (pixels per frame) to cross screen in ~ CROSSING_TIME
     function getSpeed() {
@@ -155,7 +159,6 @@
       for (let i = 0; i < numBeams; i++) {
         beams.push(createBeam());
       }
-
     });
 
     // Create the beams
@@ -169,12 +172,12 @@
     /********************************************************
      * Beam creation & helper functions
      ********************************************************/
-    document.body.addEventListener("click", function (evt) {
+    // Listen for clicks anywhere in the document (even outside the body’s content)
+    document.documentElement.addEventListener("click", function (evt) {
       const x = evt.clientX;
       const y = evt.clientY;
-      // Create a new beam right where user clicked
+      // Create a new beam right where the user clicked
       const newBeam = createBeamAt(x, y);
-      // Add it to the global array so it moves/animates
       beams.push(newBeam);
     });
 
@@ -188,11 +191,11 @@
       // 3) Convert angle to radians
       const angleRad = angleDeg * (Math.PI / 180);
 
-      // 4) Create DOM element for the beam
+      // 4) Create the DOM element for the beam
       const laserEl = document.createElement("div");
       laserEl.className = "laser";
       laserEl.textContent = startingLaserText;
-      document.body.appendChild(laserEl);
+      laserContainer.appendChild(laserEl);
 
       // 5) Position the beam at that edge
       let x = 0, y = 0;
@@ -236,27 +239,22 @@
       return beam;
     }
 
-    // Returns a random angle (in degrees) that keeps the beam traveling inward
-    // at an angle between 30°..150°, etc., depending on the edge.
+    // Returns a random angle (in degrees) that keeps the beam traveling inward.
     function randomAngleForEdge(edge) {
-      // We'll define these angle ranges so the beam always travels inward:
+      // Angle ranges so the beam always travels inward:
       // top    => [30..70]   (downward-ish)
       // right  => [120..160] (leftward-ish)
       // bottom => [210..250] (upward-ish)
       // left   => [20..60]   (rightward-ish)
       switch (edge) {
-        case 0: // top
-          return randomRange(30, 70);
-        case 1: // right
-          return randomRange(120, 160);
-        case 2: // bottom
-          return randomRange(210, 250);
-        case 3: // left
-          return randomRange(20, 60);
+        case 0: return randomRange(30, 70);
+        case 1: return randomRange(120, 160);
+        case 2: return randomRange(210, 250);
+        case 3: return randomRange(20, 60);
       }
     }
 
-    // Return random number in [min, max].
+    // Return a random number in [min, max].
     function randomRange(min, max) {
       return Math.random() * (max - min) + min;
     }
@@ -265,7 +263,6 @@
      * Main animation loop
      ********************************************************/
     function animate() {
-      // Update each beam
       for (let beam of beams) {
         updateBeam(beam);
       }
@@ -276,7 +273,7 @@
      * Beam Update (position, bounce, diffraction)
      ********************************************************/
     function updateBeam(beam) {
-      // 1) Move
+      // 1) Move the beam
       beam.x += beam.dx;
       beam.y += beam.dy;
 
@@ -308,12 +305,12 @@
         collided = true;
       }
 
-      // If any collision occurred, update diffraction
+      // If a collision occurred, update the diffraction effect
       if (collided) {
         updateDiffraction(beam);
       }
 
-      // 4) Update the rotation so the beam looks correct
+      // 4) Update rotation so the beam “points” in its moving direction
       const angleRad = Math.atan2(beam.dy, beam.dx);
       const angleDeg = angleRad * (180 / Math.PI);
       el.style.transform = `translate(${beam.x}px, ${beam.y}px) rotate(${angleDeg}deg)`;
@@ -323,35 +320,30 @@
      * Diffraction Effect
      ********************************************************/
     function updateDiffraction(beam) {
-      // Pick a random pattern from the list
+      // Pick a random diffraction pattern
       const randomPattern = diffractionPatterns[
         Math.floor(Math.random() * diffractionPatterns.length)
       ];
 
-      // If there's an existing diffraction typing in progress, clear it
+      // Clear any existing typing effect
       if (beam.diffractionTimeout) {
         clearTimeout(beam.diffractionTimeout);
       }
 
-      // Clear current text and start typing effect from scratch
+      // Clear current text and start the typing effect
       beam.element.textContent = "";
       typeDiffraction(beam, randomPattern, 0);
     }
 
-    // Recursive typing function
+    // Recursive typing function for the diffraction effect
     function typeDiffraction(beam, text, index) {
-      // If we've not reached the end of the string, append the next character
       if (index < text.length) {
         beam.element.textContent += text.charAt(index);
-
-        // Schedule the next character
         beam.diffractionTimeout = setTimeout(() => {
           typeDiffraction(beam, text, index + 1);
         }, TYPING_SPEED);
       }
     }
-</script>
-
-
+  </script>
 </body>
 </html>
