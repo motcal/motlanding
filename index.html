@@ -148,6 +148,7 @@
     /* Staggered delay for each menu item */
     .menu-container.active .menu-dropdown a:nth-child(1) { transition-delay: 0.05s; }
     .menu-container.active .menu-dropdown a:nth-child(2) { transition-delay: 0.1s; }
+    .menu-container.active .menu-dropdown a:nth-child(3) { transition-delay: 0.15s; }
     
     /* Careers view styles */
     #careersLinkFromHome {
@@ -294,12 +295,13 @@
   <div id="careersList" class="content">
     <div id="homeBackButton" class="role-tile back-button">&larr; Home</div>
     <div class="role-item role-tile" data-role='{
+        "id": "electrical-engineer",
         "title": "Electrical Engineer",
         "location": "Los Angeles, CA",
         "intro": ["Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
                 "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey to re-invent computing from first principles, we&apos;re seeking a visionary Electrical Engineer to help lead the transformation.",
                 "As our Electrical Engineer, you&apos;ll play a critical role in the development and launch of our first two products:",
-                "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation Interconnects that will integrate with our optical computing platform, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration.",
+                "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects that will integrate with our optical computing platform, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration.",
                 "Rack Scale Optical Computing Platform — We are architecting an entirely new form of hyperscale computing, eliminating conventional bottlenecks. This involves evaluating and integrating key technologies while developing many of our own in house."],
         "what": ["Lead the development of two next-generation interconnect boards, integrating off-the-shelf optical modules into our system architecture.",
                 "Select optimal PCB materials and VIA packaging solutions to maximize performance, reliability, and manufacturability.",
@@ -328,6 +330,44 @@
         "apply": "Send your resume to join at meshoptical dot com."}'>
         Electrical Engineer<br><small>Los Angeles, CA</small>
     </div>
+    <div class="role-item role-tile" data-role='{
+      "id": "mechanical-engineer",
+      "title": "Mechanical Engineer",
+      "location": "Los Angeles, CA",
+      "intro": ["Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
+              "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware.  As we scale from initial prototyping to mass manufacturing, we&apos;re seeking a skilled Mechanical Engineer to drive the industrialization of our optical computing platforms.",
+              "Your mechanical engineering expertise will directly contribute to the scalability, manufacturability, and reliability of our first two products:",
+              "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects that will integrate with our optical computing platform, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration.",
+              "Rack Scale Optical Computing Platform — We are architecting an entirely new form of hyperscale computing, eliminating conventional bottlenecks. This involves evaluating and integrating key technologies while developing many of our own in house."],
+      "what": ["Own mechanical design from initial concept through high-volume production, focusing on rack-scale optical computing modules and interconnect hardware.",
+              "Develop and refine detailed mechanical design requirements, collaborate on system-level integration, and ensure compliance with stringent performance standards.",
+              "Rapidly prototype and iterate mechanical components and assemblies to optimize performance, manufacturability, and reliability.",
+              "Drive holistic Design for Manufacturing (DFM) to minimize complexity, reduce piece-part counts, and implement error-proofing throughout fabrication, assembly, and integration processes.",
+              "Collaborate cross-functionally with electrical, optical, manufacturing, and software engineering teams to meet system-level goals and integration requirements.",
+              "Conduct rigorous environmental and performance testing to validate mechanical designs and ensure compliance with reliability standards.",
+              "Provide mechanical engineering leadership and technical mentorship, contributing actively to team growth, hiring, and capability building"],
+      "basic": ["BS in Mechanical Engineering or a closely related engineering discipline.",
+              "2+ years of professional experience (including internships) in mechanical design, analysis, and testing, specifically with complex mechanical assemblies or interconnect systems.",
+              "Proficiency with 3D CAD software (SolidWorks, NX, or similar).",
+              "Demonstrated understanding and practical application of structural analysis, including FEA tools."],
+      "preferred": ["MS in Mechanical Engineering or related technical discipline.",
+                  "3+ years of professional experience in the mechanical engineering of rack scale computing systems of subsystems.",
+                  "Proficiency in GD&T (Geometric Dimensioning & Tolerancing).",
+                  "Prior experience transitioning designs from prototype to high-volume manufacturing.",
+                  "Knowledge of material selection, manufacturing processes, and surface treatments applicable to high-performance mechanical systems.",
+                  "Experience working closely with electrical engineers on PCB mechanical design, integration, and thermal management.",
+                  "Familiarity with design of experiments (DOE), statistical process control, and qualification of mechanical processes.",
+                  "Hands-on experience with automation, precision assembly processes, or robotics for manufacturing.",
+                  "Exceptional communication skills and a relentless drive to push technological boundaries beyond your own core competencies."],
+      "compensation": ["Competitive cash salary determined by experience and merit",
+                      "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
+                      "Comprehensive medical, vision, and dental insurance",
+                      "Additional benefits including life insurance, short term, and long term disability",
+                      "Paid parental leave",
+                      "3 weeks paid vacation and 10 paid company holidays per year"],
+      "apply": "Send your resume to join at meshoptical dot com."}'>
+      Mechanical Engineer<br><small>Los Angeles, CA</small>
+  </div>
   </div>
 
   <!-- Role Description View -->
@@ -647,6 +687,9 @@
       document.getElementById("content").style.display = "none";
       document.getElementById("careersList").style.display = "block";
       document.getElementById("roleDescription").style.display = "none";
+      setTimeout(function() {
+        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+      }, 50);
     }
 
     function showHome() {
@@ -654,6 +697,9 @@
       document.getElementById("content").style.display = "block";
       document.getElementById("careersList").style.display = "none";
       document.getElementById("roleDescription").style.display = "none";
+      setTimeout(function() {
+        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+      }, 50);
     }
 
     // Add click events to each role tile.
@@ -668,6 +714,8 @@
           document.getElementById("roleDescription").style.display = "block";
           // Turn off the laser animation when viewing the role description
           document.getElementById("laserContainer").style.display = "none";
+          // Update the URL hash for deep linking
+          window.location.hash = roleData.id;
         });
     });
 
@@ -677,6 +725,9 @@
       document.getElementById("careersList").style.display = "block";
       // Turn the laser animation back on when leaving the role description
       document.getElementById("laserContainer").style.display = "block";
+      setTimeout(function() {
+        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+      }, 50);
     });
 
     document.getElementById("homeBackButton").addEventListener("click", function() {
@@ -736,6 +787,42 @@
       } else {
         document.body.classList.add("light-mode");
         this.textContent = "🌑";
+      }
+    });
+  </script>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.location.hash) {
+        const roleId = window.location.hash.substring(1); // Remove the #
+        console.log("URL hash found:", roleId);
+
+        // Simulate clicking the Careers link in the dropdown to show the careers list.
+        document.getElementById("careersLink").click();
+
+        // Wait until the careers list is visible before clicking the role tile.
+        const interval = setInterval(function() {
+          const careersList = document.getElementById("careersList");
+          if (window.getComputedStyle(careersList).display !== "none") {
+            // Now that the careers list is visible, find the matching role tile.
+            const roleTiles = document.querySelectorAll(".role-item");
+            let found = false;
+            roleTiles.forEach(function(tile) {
+              const roleData = JSON.parse(tile.getAttribute("data-role"));
+              console.log("Checking role:", roleData.id);
+              if (roleData.id === roleId) {
+                console.log("Role found:", roleData.id);
+                tile.click();
+                found = true;
+              }
+            });
+            if (found) {
+              clearInterval(interval);
+            }
+          }
+        }, 100);
+      } else {
+        console.log("No URL hash found");
       }
     });
   </script>
