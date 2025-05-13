@@ -136,6 +136,8 @@
       border: 1px solid white;
       margin: 5px 0;
       cursor: pointer;
+      border-radius: 8px;
+      font-size: min(1.8vw, 1.8vh);
     }
     .menu-container.active .menu-dropdown a {
       opacity: 1;
@@ -157,20 +159,25 @@
     #careersList {
       display: none;
       overflow-y: auto;
-      max-height: 80vh;
+      max-height: 90vh;
       padding: 20px;
       animation: fadeIn 0.5s ease-out;
       margin-top: 40px;
-      margin-bottom: 120px;
+      margin-bottom: 40px;
     }
     .role-tile {
-      border: 1px solid white;
       margin: 10px 0;
+      display: block;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.05);
       padding: 20px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
+      border: 1px solid white;
+      border-radius: 8px;
+      transition: transform 0.2s ease, background 0.3s ease;
     }
+
     .role-tile:hover {
+      transform: translateY(-4px);
       background: rgba(255, 255, 255, 0.1);
     }
     #roleDescription {
@@ -295,35 +302,159 @@
   <div id="careersList" class="content">
     <div id="homeBackButton" class="role-tile back-button">&larr; Home</div>
     <div class="role-item role-tile" data-role='{
+      "id": "process-engineer",
+      "title": "Process Engineer",
+      "location": "Los Angeles, CA",
+      "intro": [
+        "Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
+        "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we&apos;re seeking an expert Semiconductor Process Engineer who is motivated by our goal to develop the highest volume optical manufacturing facility in North America.",
+        "As our Process Engineer, you&apos;ll play a critical role in the development and launch of our first product:",
+        "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. Their assembly requires wafer-level bonding, flip-chip attach, eutectic soldering, and under-fill processes that achieve ≥ 99.9 % yield while surviving thousands of thermal cycles. You&apos;ll invent, optimize, and qualify those recipes, then transfer them onto our production floor."
+      ],
+      "what": [
+        "Own development of wafer-level and die-level packaging processes: eutectic AuSn bonding, Cu/SnAg bump-to-pad flip-chip, under-fill, and conformal coating.",
+        "Push bond yield above ≥ 99.9 % and thermal-cycle reliability beyond 20,000 cycles.",
+        "Characterize interfaces with X-ray, SAM, TEM/SEM, CSAM, and high-temperature shear testing, closing the loop with electrical, mechanical, and photonic circuit design teams.",
+        "Drive tool selection, recipe development, and statistical process control limits to transfer processes from R&D to volume production.",
+        "Act as the technical owner for failure-analysis findings and corrective actions.",
+        "Provide technical mentorship and interview candidates as we work to build up high-volume semiconductor packaging know-how in the US."
+      ],
+      "basic": [
+        "MS or PhD in Materials Science, Chemical Engineering, Electrical Engineering, or similar.",
+        "Extensive hands-on semiconductor process-development experience.",
+        "Demonstrated success qualifying high yield flip-chip, eutectic, thermo-compression, or hybrid bonding.",
+        "Deep expertise in statistical quality control and process improvement methodologies, with experience leading internal audits and driving continuous improvement.",
+        "Willingness to work extended hours and weekends as needed."
+      ],
+      "preferred": [
+        "Nanofabrication background (e-beam lithography, dry etch, PECVD, CMP).",
+        "Experience integrating photonic devices (SiPh, InP) into complex opto-electronic packages."
+      ],
+      "compensation": [
+        "Competitive cash salary commensurate with experience and merit.",
+        "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
+        "Comprehensive medical, vision, and dental insurance.",
+        "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
+        "Relocation assistance to sunny Los Angeles."
+      ],
+      "apply": "Send your resume to join at meshoptical dot com."}'>
+      Process Engineer<br><small>Los Angeles, CA</small>
+    </div>
+      <div class="role-item role-tile" data-role='{
+        "id": "pic-engineer",
+        "title": "Photonic Integrated Circuit Design Engineer",
+        "location": "Los Angeles, CA",
+        "intro": [
+          "Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
+          "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware.  As we embark on this journey, we&apos;re seeking a Photonic Integrated Circuit Design Engineer who is motivated by our goal to develop the highest volume optical manufacturing facility in North America.",
+          "As our Process Engineer, you&apos;ll play a critical role in the development and launch of our first product:",
+          "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. You will own the core photonic chip: translating system-level link budgets into silicon layouts, driving tape-outs through leading foundries, and working side-by-side with test and manufacturing teams to dial in performance, yield, and reliability as we ramp from prototypes to high-volume production."],
+        "what": [
+          "Design next-generation silicon-photonics integrated circuits.",
+          "Leverage, and when necessary, extend foundry PDKs by adding custom compact models, layout cells, and verification decks for novel devices.",
+          "Run electromagnetic / finite-difference-time-domain (FDTD) simulations for waveguides, grating/edge couplers, mode converters, interferometers, and modulators—validating loss, bandwidth, and phase response before tape-out. ",
+          "Develop test plans, automated wafer-level probing, and bench setups to close the model-to-measurement loop.",
+          "Collaborate with packaging, electrical, and software teams to co-optimize link budgets, thermal design, and control loops.",
+          "Provide technical mentorship and interview candidates as we work to build up a world class photonic integrated circuit design team."
+        ],
+        "basic": [
+          "MS or PhD in Electrical Engineering, Applied Physics, or Optics/Photonics.",
+          "Extensive professional PIC design experience with at least one tape-out in production.",
+          "Proficiency with photonic layout tools and electromagnetic solvers.",
+          "Familiarity with high-speed driver/receiver circuits and optical link characterization.",
+          "Willingness to work extended hours and weekends as needed."
+        ],
+        "preferred": [
+          "Experience with coherent Tx/Rx, SOA/EDFA integration, or LiNbO₃ thin-film modulators.",
+          "Knowledge of control firmware (Python or C++) for thermo-optic and electro-optic tuning."
+        ],
+        "compensation": [
+          "Competitive cash salary commensurate with experience and merit.",
+          "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
+          "Comprehensive medical, vision, and dental insurance.",
+          "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
+          "Relocation assistance to sunny Los Angeles."
+        ],
+        "apply": "Send your resume to join at meshoptical dot com."}'>
+        Photonic Integrated Circuit Design Engineer<br><small>Los Angeles, CA</small>
+    </div>
+    <div class="role-item role-tile" data-role='{
+      "id": "manufacturing-engineer",
+      "title": "Manufacturing Engineer",
+      "location": "Los Angeles, CA",
+      "intro": [
+        "Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
+        "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we&apos;re seeking a senior Manufacturing Engineer who is motivated by our goal to develop the highest volume optical manufacturing facility in North America.",
+        "As our Manufacturing Engineer, you&apos;ll play a critical role in the development and launch of our first product:",
+        "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. Building them at scale demands a production line that flawlessly executes wafer-level bonding, flip-chip attach, eutectic reflow, under-fill, and rigorous automated inspection. As Senior Manufacturing Engineer, you&apos;ll architect that line end-to-end: spec the tools, model takt-times, bring the equipment online, and drive it to high-uptime, high-volume output."
+      ],
+      "what": [
+        "Architect, model, and commission our transceiver production line—tool layout, takt-time modeling, ergonomics, and full 3-D facility CAD.",
+        "Specify capital equipment (die-bond, flip-chip, wire-bond, AOI, burn-in, environmental test) and own vendor relationships through procurement.",
+        "Build digital twins of stations for throughput trade studies; implement poka-yoke fixtures and automated test coverage for end of line software load and optical bit error rate testing.",
+        "Develop and enforce design rules that shorten build time.",
+        "Lead root-cause analysis for any downtime.",
+        "Own various aspects of the production line: first pass yield, maintenance schedules, and cost targets."],
+      "basic": [
+        "BS or MS in Mechanical or Industrial Engineering (or equivalent).",
+        "Extensive experience owning high-volume electrical or optical manufacturing lines.",
+        "Expert-level CAD proficiency; able to release complete drawing packages with GD&T and tolerance stacks.",
+        "Experience developing production lines that involve interaction with PLCs, robotics integration, and process/materials traceability.",
+        "Willingness to work extended hours and weekends as needed."
+      ],
+      "preferred": [
+        "A clear supplier-of-last-resort mentality: you can machine, wire, solder, and write quick Python scripts when the line needs it."
+      ],
+      "compensation": [
+        "Competitive cash salary commensurate with experience and merit.",
+        "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
+        "Comprehensive medical, vision, and dental insurance.",
+        "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
+        "Relocation assistance to sunny Los Angeles."
+      ],
+      "apply": "Send your resume to join at meshoptical dot com."}'>
+      Manufacturing Engineer<br><small>Los Angeles, CA</small>
+    </div>  
+    <div class="role-item role-tile" data-role='{
         "id": "electrical-engineer",
         "title": "Electrical Engineer",
         "location": "Los Angeles, CA",
-        "intro": ["Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
-                "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we&apos;re seeking a visionary Electrical Engineer to help lead the transformation.",
-                "As our Electrical Engineer, you&apos;ll play a critical role in the development and launch of our first product:",
-                "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects that will integrate with our optical computing platform, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration."],
-        "what": ["Lead the development of our next-generation optical interconnect boards and associated circuitry.",
-                "Select optimal PCB materials and VIA packaging solutions to maximize performance, reliability, signal integrity, and manufacturability.",
-                "Run high-speed signal integrity and RF simulations to ensure robust performance at speeds beyond 100G.",
-                "Collaborate with software teams developing hardware control and link optimization software.",
-                "Play an active role in our production process by factoring high volume manufacturing into every design decision. ",
-                "Plan and execute an iteration strategy in the components you own to achieve optimal cost, yield, and reliability as we scale our manufacturing footprint.",
-                "Provide technical mentorship and interview candidates as we build and grow a world class electrical engineering team."],
-        "basic": ["BS or MS in Electrical Engineering or a related field.",
-                "Experience in designing and developing mixed-signal systems from design trades to production including component level selection and implementation of processors, FPGAs, multi-GHz SerDes, I2C, and SPI.",
-                "Strong analytical and problem-solving skills with a demonstrated ability to drive hardware reliability over the full life cycle of a product.",
-                "Experience working effectively in fast-paced, cross-functional teams.",
-                "Willingness to work extended hours and weekends as needed."],
-        "preferred": ["Professional experience with high-speed signal integrity and RF simulation.",
-                    "PhD in Electrical Engineering or equivalent technical expertise.",
-                    "Leadership experience mentoring engineers and managing complex projects.",
-                    "Strong understanding of programming languages (Python, C/C++)",
-                    "Exceptional communication skills and a relentless drive to push technological boundaries beyond your own core competencies."],
-        "compensation": ["Competitive cash salary commensurate with experience and merit.",
-                        "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
-                        "Comprehensive medical, vision, and dental insurance.",
-                        "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
-                        "Relocation assistance to sunny Los Angeles."],
+        "intro": [
+          "Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
+          "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we&apos;re seeking a visionary Electrical Engineer to help lead the transformation.",
+          "As our Electrical Engineer, you&apos;ll play a critical role in the development and launch of our first product:",
+          "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration."
+        ],
+        "what": [
+          "Lead the development of our next-generation optical interconnect boards and associated circuitry.",
+          "Select optimal PCB materials and VIA packaging solutions to maximize performance, reliability, signal integrity, and manufacturability.",
+          "Run high-speed signal integrity and RF simulations to ensure robust performance at speeds beyond 100G.",
+          "Collaborate with software teams developing hardware control and link optimization software.",
+          "Play an active role in our production process by factoring high volume manufacturing into every design decision. ",
+          "Plan and execute an iteration strategy in the components you own to achieve optimal cost, yield, and reliability as we scale our manufacturing footprint.",
+          "Provide technical mentorship and interview candidates as we build and grow a world class electrical engineering team."
+        ],
+        "basic": [
+          "BS or MS in Electrical Engineering or a related field.",
+          "Experience in designing and developing mixed-signal systems from design trades to production including component level selection and implementation of processors, FPGAs, multi-GHz SerDes, I2C, and SPI.",
+          "Strong analytical and problem-solving skills with a demonstrated ability to drive hardware reliability over the full life cycle of a product.",
+          "Experience working effectively in fast-paced, cross-functional teams.",
+          "Willingness to work extended hours and weekends as needed."
+        ],
+        "preferred": [
+          "Professional experience with high-speed signal integrity and RF simulation.",
+          "PhD in Electrical Engineering or equivalent technical expertise.",
+          "Leadership experience mentoring engineers and managing complex projects.",
+          "Strong understanding of programming languages (Python, C/C++)",
+          "Exceptional communication skills and a relentless drive to push technological boundaries beyond your own core competencies."
+        ],
+        "compensation": [
+          "Competitive cash salary commensurate with experience and merit.",
+          "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
+          "Comprehensive medical, vision, and dental insurance.",
+          "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
+          "Relocation assistance to sunny Los Angeles."
+        ],
         "apply": "Send your resume to join at meshoptical dot com."}'>
         Electrical Engineer<br><small>Los Angeles, CA</small>
     </div>
@@ -331,35 +462,46 @@
       "id": "mechanical-engineer",
       "title": "Mechanical Engineer",
       "location": "Los Angeles, CA",
-      "intro": ["Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
-              "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware.  As we scale from initial prototyping to mass manufacturing, we&apos;re seeking a skilled Mechanical Engineer to drive the industrialization of our optical interconnect platform.",
-              "Your mechanical engineering expertise will directly contribute to the scalability, manufacturability, and reliability of our first product:",
-              "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects that will integrate with our optical computing platform, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration."],
-      "what": ["Own mechanical design from initial concept through high-volume production.",
-              "Develop and refine detailed mechanical design requirements, collaborate on system-level integration, and ensure compliance with stringent performance standards.",
-              "Rapidly prototype and iterate mechanical components and assemblies to optimize performance, manufacturability, and reliability.",
-              "Drive holistic Design for Manufacturing (DFM) to minimize complexity, reduce piece-part counts, and implement error-proofing throughout fabrication, assembly, and integration processes.",
-              "Collaborate cross-functionally with electrical, optical, manufacturing, and software engineering teams to meet system-level goals and integration requirements.",
-              "Conduct rigorous environmental and performance testing to validate mechanical designs and ensure compliance with reliability standards.",
-              "Provide mechanical engineering leadership and technical mentorship, contributing actively to team growth, hiring, and capability building."],
-      "basic": ["BS in Mechanical Engineering or a closely related engineering discipline.",
-              "2+ years of professional experience (including internships) in mechanical design, analysis, and testing, specifically with complex mechanical assemblies or interconnect systems.",
-              "Proficiency with 3D CAD software (SolidWorks, NX, or similar).",
-              "Demonstrated understanding and practical application of structural analysis, including FEA tools."],
-      "preferred": ["MS in Mechanical Engineering or related technical discipline.",
-                  "3+ years of professional experience in the mechanical engineering of rack scale computing systems of subsystems.",
-                  "Proficiency in GD&T (Geometric Dimensioning & Tolerancing).",
-                  "Prior experience transitioning designs from prototype to high-volume manufacturing.",
-                  "Knowledge of material selection, manufacturing processes, and surface treatments applicable to high-performance mechanical systems.",
-                  "Experience working closely with electrical engineers on PCB mechanical design, integration, and thermal management.",
-                  "Familiarity with design of experiments (DOE), statistical process control, and qualification of mechanical processes.",
-                  "Hands-on experience with automation, precision assembly processes, or robotics for manufacturing.",
-                  "Exceptional communication skills and a relentless drive to push technological boundaries beyond your own core competencies."],
-      "compensation": ["Competitive cash salary commensurate with experience and merit.",
-                  "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
-                  "Comprehensive medical, vision, and dental insurance.",
-                  "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
-                  "Relocation assistance to sunny Los Angeles."],
+      "intro": [
+        "Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
+        "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware.  As we scale from initial prototyping to mass manufacturing, we&apos;re seeking a skilled Mechanical Engineer to drive the industrialization of our optical interconnect platform.",
+        "Your mechanical engineering expertise will directly contribute to the scalability, manufacturability, and reliability of our first product:",
+        "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business. This work involves high-speed PCB design, RF simulation, signal integrity optimization, and system-level integration."
+      ],
+      "what": [
+        "Own mechanical design from initial concept through high-volume production.",
+        "Develop and refine detailed mechanical design requirements, collaborate on system-level integration, and ensure compliance with stringent performance standards.",
+        "Rapidly prototype and iterate mechanical components and assemblies to optimize performance, manufacturability, and reliability.",
+        "Drive holistic Design for Manufacturing (DFM) to minimize complexity, reduce piece-part counts, and implement error-proofing throughout fabrication, assembly, and integration processes.",
+        "Collaborate cross-functionally with electrical, optical, manufacturing, and software engineering teams to meet system-level goals and integration requirements.",
+        "Conduct rigorous environmental and performance testing to validate mechanical designs and ensure compliance with reliability standards.",
+        "Provide mechanical engineering leadership and technical mentorship, contributing actively to team growth, hiring, and capability building."
+      ],
+      "basic": [
+        "BS in Mechanical Engineering or a closely related engineering discipline.",
+        "2+ years of professional experience (including internships) in mechanical design, analysis, and testing, specifically with complex mechanical assemblies or interconnect systems.",
+        "Proficiency with 3D CAD software (SolidWorks, NX, or similar).",
+        "Demonstrated understanding and practical application of structural analysis, including FEA tools.",
+        "Willingness to work extended hours and weekends as needed."
+      ],
+      "preferred": [
+        "MS in Mechanical Engineering or related technical discipline.",
+        "3+ years of professional experience in the mechanical engineering of rack scale computing systems of subsystems.",
+        "Proficiency in GD&T (Geometric Dimensioning & Tolerancing).",
+        "Prior experience transitioning designs from prototype to high-volume manufacturing.",
+        "Knowledge of material selection, manufacturing processes, and surface treatments applicable to high-performance mechanical systems.",
+        "Experience working closely with electrical engineers on PCB mechanical design, integration, and thermal management.",
+        "Familiarity with design of experiments (DOE), statistical process control, and qualification of mechanical processes.",
+        "Hands-on experience with automation, precision assembly processes, or robotics for manufacturing.",
+        "Exceptional communication skills and a relentless drive to push technological boundaries beyond your own core competencies."
+      ],
+      "compensation": [
+        "Competitive cash salary commensurate with experience and merit.",
+        "Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.",
+        "Comprehensive medical, vision, and dental insurance.",
+        "Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).",
+        "Relocation assistance to sunny Los Angeles."
+      ],
       "apply": "Send your resume to join at meshoptical dot com."}'>
       Mechanical Engineer<br><small>Los Angeles, CA</small>
     </div>
@@ -371,7 +513,7 @@
           "Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we&apos;re putting that vision into practice by developing the world&apos;s most advanced optical computing hardware.",
           "We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we&apos;re seeking a visionary Software Engineer to architect the foundation.",
           "As our Software Engineer, you&apos;ll play a critical role in the software that controls and produces our first product:",
-          "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects that will integrate with our optical computing platform, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business."
+          "Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. We are developing next-generation interconnects, pushing the limits of high-speed data transmission beyond 100G and powering the rest of our business."
         ],
         "what": [
           "Develop highly reliable firmware and the simulations required to validate critical timing, signal-processing, and hardware-control paths.",
@@ -788,10 +930,12 @@
     function showCareers() {
       document.getElementById("header").style.display = "none";
       document.getElementById("content").style.display = "none";
-      document.getElementById("careersList").style.display = "block";
+      const careersListEl = document.getElementById("careersList");
+      careersListEl.style.display = "block";
+      careersListEl.scrollTop = 0;
       document.getElementById("roleDescription").style.display = "none";
-      setTimeout(function() {
-        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+      setTimeout(() => {
+        history.replaceState(null, '', window.location.pathname);
       }, 50);
     }
 
@@ -800,8 +944,8 @@
       document.getElementById("content").style.display = "block";
       document.getElementById("careersList").style.display = "none";
       document.getElementById("roleDescription").style.display = "none";
-      setTimeout(function() {
-        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+      setTimeout(() => {
+        history.replaceState(null, '', window.location.pathname);
       }, 50);
     }
 
@@ -814,7 +958,9 @@
           const roleData = JSON.parse(this.getAttribute("data-role"));
           const detailContainer = document.getElementById("roleDetail");
           detailContainer.innerHTML = renderRoleDescription(roleData);
-          document.getElementById("roleDescription").style.display = "block";
+          const roleDescriptionEl = document.getElementById("roleDescription");
+          roleDescriptionEl.style.display = "block";
+          roleDescriptionEl.scrollTop = 0;
           // Turn off the laser animation when viewing the role description
           document.getElementById("laserContainer").style.display = "none";
           // Update the URL hash for deep linking
@@ -825,11 +971,13 @@
     // Back button to return to the careers list.
     document.getElementById("backButton").addEventListener("click", function() {
       document.getElementById("roleDescription").style.display = "none";
-      document.getElementById("careersList").style.display = "block";
+      const careersListEl = document.getElementById("careersList");
+      careersListEl.style.display = "block";
+      careersListEl.scrollTop = 0;
       // Turn the laser animation back on when leaving the role description
       document.getElementById("laserContainer").style.display = "block";
-      setTimeout(function() {
-        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+      setTimeout(() => {
+        history.replaceState(null, '', window.location.pathname);
       }, 50);
     });
 
@@ -904,24 +1052,17 @@
         document.getElementById("careersLink").click();
 
         // Wait until the careers list is visible before clicking the role tile.
-        const interval = setInterval(function() {
+        const interval = setInterval(function () {
           const careersList = document.getElementById("careersList");
           if (window.getComputedStyle(careersList).display !== "none") {
-            // Now that the careers list is visible, find the matching role tile.
             const roleTiles = document.querySelectorAll(".role-item");
-            let found = false;
-            roleTiles.forEach(function(tile) {
+            roleTiles.forEach(function (tile) {
               const roleData = JSON.parse(tile.getAttribute("data-role"));
-              console.log("Checking role:", roleData.id);
               if (roleData.id === roleId) {
-                console.log("Role found:", roleData.id);
                 tile.click();
-                found = true;
+                clearInterval(interval);
               }
             });
-            if (found) {
-              clearInterval(interval);
-            }
           }
         }, 100);
       } else {
