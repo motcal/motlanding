@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="icon" type="image/png" href="/images/mesh.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Mesh Optical Technologies</title>
+</head>
+<body>
+  
+
+  <div class="menu-container" id="menuContainer">
+    <button class="menu-button" onclick="toggleMenu()">
+      <div class="menu-icon">
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+    <div class="menu-dropdown">
+      <a href="/">Home</a>
+      <a href="/careers/">Careers</a>
+      <a href="#" id="lightModeButton">💡</a>
+    </div>
+  </div>
+
+  
+<!-- Role Description View -->
+<div id="roleDescription" class="content">
+  <div id="roleDetail">
+  <div class="role-header" style="text-align: center; padding-top: 40px;">
+    <h2>Electrical Engineer</h2>
+    <h4>Los Angeles, CA</h4>
+  </div>
+  <div class="role-intro">
+    
+      <p>Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we're putting that vision into practice by developing the world's most advanced optical computing hardware.</p>
+    
+      <p>We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we're seeking an Electrical Engineer who is motivated by our goal to operate the highest volume optical manufacturing facility in North America.</p>
+    
+      <p>As our Eletrical Engineer, you'll play a critical role in the development and launch of our first product:</p>
+    
+      <p>Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. Delivering them at scale requires a robust electrical test and validation architecture that spans from early evaluation through final product readiness. As the Electrical Engineer overseeing this effort, you'll be responsible for the full lifecycle: design and maintain evaluation and signal integrity test platforms, define and implement the end-of-line electrical and compute infrastructure for automated testing and firmware flashing, and ensure every unit shipped meets spec. Your role is critical to closing the loop between design, production, and deployment with high reliability and throughput.</p>
+    
+  </div>
+  <h3>What you'll do</h3>
+  <ul>
+    
+      <li>Design, develop, and maintain electrical systems to validate first release of new silicon, optics, and interconnect components across multiple product generations.</li>
+    
+      <li>Architect and implement signal integrity test platforms, including high-speed test fixtures, controlled impedance routing, and integration with VNAs, BERTs, and oscilloscopes.</li>
+    
+      <li>Own end-of-line test and flash infrastructure, including board bring-up, firmware flashing, boundary scan/JTAG, and automated test execution across production stations.</li>
+    
+      <li>Develop and validate test coverage for high-speed SerDes, ensuring compliance with performance and reliability targets.</li>
+    
+      <li>Collaborate with manufacturing, firmware, and mechanical teams to ensure testability, debug access, and thermal/electrical robustness of production units.</li>
+    
+      <li>Analyze electrical failures and yield trends using data-driven methods to drive root cause analysis, implement corrective actions, and improve factory throughput.</li>
+    
+  </ul>
+  <h3>Basic Qualifications</h3>
+  <ul>
+    
+      <li>BS or MS in Electrical Engineering or related discipline.</li>
+    
+      <li>Experience designing and validating complex PCB assemblies for embedded systems, test platforms, or production hardware.</li>
+    
+      <li>Proficient in schematic capture and multilayer PCB layout using tools such as Altium Designer, with a strong understanding of DFM and DFT principles.</li>
+    
+      <li>Hands-on experience with lab instrumentation and debug workflows, including oscilloscopes, logic analyzers, and power measurement.</li>
+    
+      <li>Demonstrated ability to lead board bring-up, validate electrical functionality, and root-cause system-level hardware issues.</li>
+    
+      <li>Comfortable working cross-functionally with firmware, mechanical, and manufacturing teams to integrate and validate hardware in real-world environments.</li>
+    
+      <li>Willingness to work extended hours and weekends as needed.</li>
+    
+  </ul>
+  <h3>Preferred Qualifications</h3>
+  <ul>
+    
+      <li>Ownership of evaluation or test platforms used in production or customer-facing hardware programs.</li>
+    
+      <li>Experience developing or integrating automated electrical test infrastructure for manufacturing or validation environments.</li>
+    
+      <li>Familiarity with firmware flashing workflows (JTAG/SWD/ISP), bootloader interfaces, and embedded system initialization.</li>
+    
+      <li>Working knowledge of scripting or software for test automation and data analysis (Python, LabVIEW, MATLAB, etc.).</li>
+    
+  </ul>
+  <h3>Compensation and benefits</h3>
+  <ul>
+    
+      <li>Competitive cash salary commensurate with experience and merit.</li>
+    
+      <li>Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.</li>
+    
+      <li>Comprehensive medical, vision, and dental insurance.</li>
+    
+      <li>Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).</li>
+    
+      <li>Relocation assistance to sunny Los Angeles.</li>
+    
+  </ul>
+  <h3>Apply</h3>
+  <p>Send your resume to join at meshoptical dot com.</p>
+  </div>
+  <a id="backButton" class="role-tile back-button back-button-role" href="/careers">&larr; Back</a>
+</div>
+
+
+  
+<!-- lasers disabled on role pages -->
+
+
+  <script>
+    /********************************************************
+     * Menu and View Functions
+     ********************************************************/
+    let hideTimeout;
+    function toggleMenu() {
+      var menuContainer = document.getElementById("menuContainer");
+      menuContainer.classList.toggle("active");
+    }
+
+    if (!("ontouchstart" in window)) {
+      const menuContainer = document.getElementById("menuContainer");
+      menuContainer.addEventListener("mouseenter", function() {
+        clearTimeout(hideTimeout);
+        this.classList.add("active");
+      });
+      menuContainer.addEventListener("mouseleave", function() {
+        hideTimeout = setTimeout(() => {
+          this.classList.remove("active");
+        }, 500);
+      });
+    }
+    document.addEventListener("click", function(event) {
+      const menuContainer = document.getElementById("menuContainer");
+      if (!menuContainer.contains(event.target)) {
+        menuContainer.classList.remove("active");
+      }
+    });
+
+    document.getElementById("lightModeButton").addEventListener("click", function(e) {
+      e.preventDefault();
+      document.getElementById("menuContainer").classList.remove("active");
+      if (document.body.classList.contains("light-mode")) {
+        document.body.classList.remove("light-mode");
+        this.textContent = "💡";
+      } else {
+        document.body.classList.add("light-mode");
+        this.textContent = "🌑";
+      }
+    });
+  </script>
+
+  <!-- Author signature, Inspect > Console -->
+  <script>
+    (function(){
+      const _0x1f3 = "Mj csy'vi viehmrk xlmw, tpiewi gsrwmhiv liptmrk yw fymph xli qeglmriw xlex qeoi epksvxmlqmgeppc kirivexih hsgyqirxw pmoi xlmw tswwmfpi";
+      function _0x2b7(_0x123) {
+        const _0x456 = _0x123 % 26;
+        let _0x789 = "";
+        for (let _0xabc = 0; _0xabc < _0x1f3.length; _0xabc++) {
+          let _0xdef = _0x1f3.charCodeAt(_0xabc);
+          if (_0xdef >= 65 && _0xdef <= 90) {
+            _0x789 += String.fromCharCode((( _0xdef - 65 - _0x456 + 26) % 26) + 65);
+          } else if (_0xdef >= 97 && _0xdef <= 122) {
+            _0x789 += String.fromCharCode((( _0xdef - 97 - _0x456 + 26) % 26) + 97);
+          } else {
+            _0x789 += _0x1f3.charAt(_0xabc);
+          }
+        }
+        return _0x789;
+      }
+      window._0x2b7 = _0x2b7;
+    })();
+  </script>
+
+</body>
+</html>
