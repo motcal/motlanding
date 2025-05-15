@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="icon" type="image/png" href="/images/mesh.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Mesh Optical Technologies</title>
+</head>
+<body>
+  
+  <div id="laserContainer"></div>
+  
+
+  <div class="menu-container" id="menuContainer">
+    <button class="menu-button" onclick="toggleMenu()">
+      <div class="menu-icon">
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+    <div class="menu-dropdown">
+      <a href="/">Home</a>
+      <a href="/careers/">Careers</a>
+      <a href="#" id="lightModeButton">💡</a>
+    </div>
+  </div>
+
+  
+<div id="careersList" class="content">
+  <a id="homeBackButton" class="role-tile back-button" href="/">&larr; Home</a>
+  
+    <a class="role-tile" href="/careers/sr-process-engineer.html">
+    <strong>Senior Process Development Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/lead-mechanical-engineer.html">
+    <strong>Lead Mechanical Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/electrical-engineer.html">
+    <strong>Electrical Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/optical-network-engineer.html">
+    <strong>Optical Network Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/software-engineer.html">
+    <strong>Software Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/firmware-engineer.html">
+    <strong>Firmware Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/process-engineer.html">
+    <strong>Process Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/pic-engineer.html">
+    <strong>Photonic Integrated Circuit Designer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/sr-electrical-engineer.html">
+    <strong>Senior Electrical Engineer</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/associate-electrical-engineer.html">
+    <strong>Associate Electrical Engineer (Intern / Co-op)</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/associate-mechanical-engineer.html">
+    <strong>Associate Mechanical Engineer (Intern / Co-op)</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+    <a class="role-tile" href="/careers/associate-software-engineer.html">
+    <strong>Associate Software Engineer (Intern / Co-op)</strong><br>
+    <small>Los Angeles, CA</small>
+    </a>
+  
+</div>
+
+
+  
+  <script>
+    /********************************************************
+     * Configuration
+     ********************************************************/
+    const numBeams = 6;                // Number of laser beams
+    const startingLaserText = "⬡";     // Starting laser trail
+    const diffractionPatterns = [
+      "/\\/\\/\\/\\/\\/",
+      "- - - - - -",
+      "~ ~ ~ ~ ~ ~",
+      ". . . . . .",
+      "⬡",
+    ];
+    const TYPING_SPEED = 70; // ms per character
+    const CROSSING_TIME = 15; // seconds to cross screen width
+
+    /********************************************************
+     * Globals & Initialization
+     ********************************************************/
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const headerEl = document.getElementById("header");
+    const contentEl = document.getElementById("content");
+    const laserContainer = document.getElementById("laserContainer");
+
+    let beams = [];
+
+    // Compute speed (pixels per frame) to cross screen in ~ CROSSING_TIME
+    function getSpeed() {
+      // 60 frames/second * CROSSING_TIME = total frames
+      // distance = screen width
+      // speed = distance / frames
+      if (width > 1000){
+        return width / (60 * 3 * CROSSING_TIME);
+      }
+
+      return width / (60 * CROSSING_TIME);
+    }
+
+    // Update screen dimensions and recalc beam velocities on resize
+    window.addEventListener("resize", () => {
+      width  = window.innerWidth;
+      height = window.innerHeight;
+
+      // Recompute and update speed for each beam
+      for (let beam of beams) {
+        let angleRad = Math.atan2(beam.dy, beam.dx);
+        let s = getSpeed();
+        beam.dx = s * Math.cos(angleRad);
+        beam.dy = s * Math.sin(angleRad);
+      }
+
+      // Clear existing beams
+      for (let beam of beams) {
+        beam.element.remove();
+      }
+      beams = [];
+
+      // Recreate beams
+      for (let i = 0; i < numBeams; i++) {
+        beams.push(createBeam());
+      }
+    });
+
+    // Create the beams
+    for (let i = 0; i < numBeams; i++) {
+      beams.push(createBeam());
+    }
+
+    // Start the animation loop
+    requestAnimationFrame(animate);
+
+    /********************************************************
+     * Beam creation & helper functions
+     ********************************************************/
+    // Listen for clicks anywhere in the document (even outside the body’s content)
+    document.documentElement.addEventListener("click", function (evt) {
+      // Prevent laser animation when clicking interactive elements
+      if (evt.target.closest("#menuContainer, #careersList, #roleDescription")) return;
+      const x = evt.clientX;
+      const y = evt.clientY;
+      // Create a new beam right where the user clicked
+      const newBeam = createBeamAt(x, y);
+      beams.push(newBeam);
+    });
+
+    function createBeam() {
+      // 1) Randomly pick one of the four edges
+      const edge = Math.floor(Math.random() * 4);
+
+      // 2) Random angle in the correct range for that edge
+      const angleDeg = randomAngleForEdge(edge);
+
+      // 3) Convert angle to radians
+      const angleRad = angleDeg * (Math.PI / 180);
+
+      // 4) Create the DOM element for the beam
+      const laserEl = document.createElement("div");
+      laserEl.className = "laser";
+      laserEl.textContent = startingLaserText;
+      laserContainer.appendChild(laserEl);
+
+      // 5) Position the beam at that edge
+      let x = 0, y = 0;
+      switch (edge) {
+        case 0: // top
+          x = Math.random() * (width - 50);
+          y = 0;
+          break;
+        case 1: // right
+          x = width;
+          y = Math.random() * (height - 50);
+          break;
+        case 2: // bottom
+          x = Math.random() * (width - 50);
+          y = height;
+          break;
+        case 3: // left
+          x = 0;
+          y = Math.random() * (height - 50);
+          break;
+      }
+
+      // 6) Compute velocity from angle + speed
+      let dx = getSpeed() * Math.cos(angleRad);
+      let dy = getSpeed() * Math.sin(angleRad);
+
+      // 7) Return the beam object
+      return {
+        element: laserEl,
+        x, y,        // current position
+        dx, dy,      // velocity
+        angleDeg,
+        diffractionTimeout: null
+      };
+    }
+
+    function createBeamAt(x, y) {
+      const beam = createBeam();
+      beam.x = x;
+      beam.y = y;
+      return beam;
+    }
+
+    // Returns a random angle (in degrees) that keeps the beam traveling inward.
+    function randomAngleForEdge(edge) {
+      // Angle ranges so the beam always travels inward:
+      // top    => [30..70]   (downward-ish)
+      // right  => [120..160] (leftward-ish)
+      // bottom => [210..250] (upward-ish)
+      // left   => [20..60]   (rightward-ish)
+      switch (edge) {
+        case 0: return randomRange(30, 70);
+        case 1: return randomRange(120, 160);
+        case 2: return randomRange(210, 250);
+        case 3: return randomRange(20, 60);
+      }
+    }
+
+    // Return a random number in [min, max].
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    /********************************************************
+     * Main animation loop
+     ********************************************************/
+    function animate() {
+      for (let beam of beams) {
+        updateBeam(beam);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    /********************************************************
+     * Beam Update (position, bounce, diffraction)
+     ********************************************************/
+    function updateBeam(beam) {
+      // 1) Move the beam
+      beam.x += beam.dx;
+      beam.y += beam.dy;
+
+      // 2) Bounce off screen edges (simple bounding)
+      const el = beam.element;
+      const beamWidth = el.offsetWidth;
+      const beamHeight = el.offsetHeight;
+
+      let collided = false;
+
+      // Left/right edges
+      if (beam.x <= 0) {
+        beam.x = 0;
+        beam.dx = -beam.dx;
+        collided = true;
+      } else if (beam.x >= width) {
+        beam.dx = -beam.dx;
+        collided = true;
+      }
+
+      // Top/bottom edges
+      if (beam.y <= 0) {
+        beam.y = 0;
+        beam.dy = -beam.dy;
+        collided = true;
+      } else if (beam.y + beamHeight >= height) {
+        beam.y = height - beamHeight;
+        beam.dy = -beam.dy;
+        collided = true;
+      }
+
+      // If a collision occurred, update the diffraction effect
+      if (collided) {
+        updateDiffraction(beam);
+      }
+
+      // 4) Update rotation so the beam “points” in its moving direction
+      const angleRad = Math.atan2(beam.dy, beam.dx);
+      const angleDeg = angleRad * (180 / Math.PI);
+      el.style.transform = `translate(${beam.x}px, ${beam.y}px) rotate(${angleDeg}deg)`;
+    }
+
+    /********************************************************
+     * Diffraction Effect
+     ********************************************************/
+    function updateDiffraction(beam) {
+      // Pick a random diffraction pattern
+      const randomPattern = diffractionPatterns[
+        Math.floor(Math.random() * diffractionPatterns.length)
+      ];
+
+      // Clear any existing typing effect
+      if (beam.diffractionTimeout) {
+        clearTimeout(beam.diffractionTimeout);
+      }
+
+      // Clear current text and start the typing effect
+      beam.element.textContent = "";
+      typeDiffraction(beam, randomPattern, 0);
+    }
+
+    // Recursive typing function for the diffraction effect
+    function typeDiffraction(beam, text, index) {
+      if (index < text.length) {
+        beam.element.textContent += text.charAt(index);
+        beam.diffractionTimeout = setTimeout(() => {
+          typeDiffraction(beam, text, index + 1);
+        }, TYPING_SPEED);
+      }
+    }
+  </script>
+  
+
+  <script>
+    /********************************************************
+     * Menu and View Functions
+     ********************************************************/
+    let hideTimeout;
+    function toggleMenu() {
+      var menuContainer = document.getElementById("menuContainer");
+      menuContainer.classList.toggle("active");
+    }
+
+    if (!("ontouchstart" in window)) {
+      const menuContainer = document.getElementById("menuContainer");
+      menuContainer.addEventListener("mouseenter", function() {
+        clearTimeout(hideTimeout);
+        this.classList.add("active");
+      });
+      menuContainer.addEventListener("mouseleave", function() {
+        hideTimeout = setTimeout(() => {
+          this.classList.remove("active");
+        }, 500);
+      });
+    }
+    document.addEventListener("click", function(event) {
+      const menuContainer = document.getElementById("menuContainer");
+      if (!menuContainer.contains(event.target)) {
+        menuContainer.classList.remove("active");
+      }
+    });
+
+    document.getElementById("lightModeButton").addEventListener("click", function(e) {
+      e.preventDefault();
+      document.getElementById("menuContainer").classList.remove("active");
+      if (document.body.classList.contains("light-mode")) {
+        document.body.classList.remove("light-mode");
+        this.textContent = "💡";
+      } else {
+        document.body.classList.add("light-mode");
+        this.textContent = "🌑";
+      }
+    });
+  </script>
+
+  <!-- Author signature, Inspect > Console -->
+  <script>
+    (function(){
+      const _0x1f3 = "Mj csy'vi viehmrk xlmw, tpiewi gsrwmhiv liptmrk yw fymph xli qeglmriw xlex qeoi epksvxmlqmgeppc kirivexih hsgyqirxw pmoi xlmw tswwmfpi";
+      function _0x2b7(_0x123) {
+        const _0x456 = _0x123 % 26;
+        let _0x789 = "";
+        for (let _0xabc = 0; _0xabc < _0x1f3.length; _0xabc++) {
+          let _0xdef = _0x1f3.charCodeAt(_0xabc);
+          if (_0xdef >= 65 && _0xdef <= 90) {
+            _0x789 += String.fromCharCode((( _0xdef - 65 - _0x456 + 26) % 26) + 65);
+          } else if (_0xdef >= 97 && _0xdef <= 122) {
+            _0x789 += String.fromCharCode((( _0xdef - 97 - _0x456 + 26) % 26) + 97);
+          } else {
+            _0x789 += _0x1f3.charAt(_0xabc);
+          }
+        }
+        return _0x789;
+      }
+      window._0x2b7 = _0x2b7;
+    })();
+  </script>
+
+</body>
+</html>
