@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="icon" type="image/png" href="/images/mesh.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Mesh Optical Technologies</title>
+</head>
+<body>
+  
+
+  <div class="menu-container" id="menuContainer">
+    <button class="menu-button" onclick="toggleMenu()">
+      <div class="menu-icon">
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+    <div class="menu-dropdown">
+      <a href="/">Home</a>
+      <a href="/careers/">Careers</a>
+      <a href="#" id="lightModeButton">💡</a>
+    </div>
+  </div>
+
+  
+<!-- Role Description View -->
+<div id="roleDescription" class="content">
+  <div id="roleDetail">
+  <div class="role-header" style="text-align: center; padding-top: 40px;">
+    <h2>Mechanical Engineer</h2>
+    <h4>Los Angeles, CA</h4>
+  </div>
+  <div class="role-intro">
+    
+      <p>Mesh Optical Technologies was founded on the belief that photons will unlock the next evolution of human technology. Today, we're putting that vision into practice by developing the world's most advanced optical computing hardware.</p>
+    
+      <p>We believe in engineering to the limit of physics, building our own factories, and writing software that maximizes the capability of our hardware. As we embark on this journey, we're seeking a Mechanical Engineer who is motivated by our goal to operate the highest volume optical manufacturing facility in North America.</p>
+    
+      <p>As our Mechanical Engineer, you'll play a critical role in the development and launch of our first product:</p>
+    
+      <p>Optical Interconnects — High-bandwidth optical interconnects are fundamental to the future of computing. Scaling their production requires a tightly integrated mechanical environment—from product design to precision material handling to robust, repeatable testing. As the Mechanical Engineer responsible for our clean room factory, you'll design and implement the full suite of mechanical systems that underpin production: from automated magazine loading/unloading across machine interfaces, to custom test fixtures for both R&D and high-volume end-of-line validation and firmware flashing. You'll ensure these systems are reliable, maintainable, and ready for scale in a high-throughput, high-yield environment.</p>
+    
+  </div>
+  <h3>What you'll do</h3>
+  <ul>
+    
+      <li>Own mechanical interfaces between our products and their production systems.</li>
+    
+      <li>Design and deploy automated material handling systems, including magazine loading/unloading and mechanical interfaces across all wafer and die-level production equipment.</li>
+    
+      <li>Develop mechanical test fixtures for product evaluation, supporting early-stage electrical, thermal, and optical testing in R&D and reliability workflows.</li>
+    
+      <li>Own end-of-line mechanical test infrastructure, enabling high-throughput electrical testing and firmware flashing with tight integration to factory automation systems.</li>
+    
+      <li>Ensure mechanical compatibility and alignment across all process tools, collaborating closely with equipment vendors, manufacturing engineers, and factory automation teams.</li>
+    
+      <li>Lead mechanical design reviews, root-cause investigations, and system bring-up efforts, ensuring readiness for high-volume optical interconnect production.</li>
+    
+  </ul>
+  <h3>Basic Qualifications</h3>
+  <ul>
+    
+      <li>BS or MS in Mechanical Engineering or related discipline.</li>
+    
+      <li>Experience in mechanical design for automation, production equipment, or test systems.</li>
+    
+      <li>Proficiency with 3D CAD tools and detailed drawing creation with GD&T.</li>
+    
+      <li>Hands-on experience designing, assembling, and troubleshooting mechanical systems including actuators, linear guides, and precision alignment components.</li>
+    
+      <li>Demonstrated ability to collaborate with cross-functional teams across manufacturing, electrical, and firmware disciplines.</li>
+    
+      <li>Willingness to work extended hours and weekends as needed.</li>
+    
+  </ul>
+  <h3>Preferred Qualifications</h3>
+  <ul>
+    
+      <li>Experience designing automated material handling systems, such as magazine loaders/unloaders or robotic transfer mechanisms.</li>
+    
+      <li>Experience working in semiconductor, photonics, or medical device manufacturing environments.</li>
+    
+      <li>Track record of scaling mechanical systems from prototype to production with a focus on uptime, serviceability, and throughput.</li>
+    
+  </ul>
+  <h3>Compensation and benefits</h3>
+  <ul>
+    
+      <li>Competitive cash salary commensurate with experience and merit.</li>
+    
+      <li>Eligibility for long-term incentives including company stock options and discretionary bonuses awarded for exceptional achievements.</li>
+    
+      <li>Comprehensive medical, vision, and dental insurance.</li>
+    
+      <li>Paid parental leave and flexible PTO (3 weeks vacation + 10 company holidays).</li>
+    
+      <li>Relocation assistance to sunny Los Angeles.</li>
+    
+  </ul>
+  <h3>Apply</h3>
+  <p>Send your resume to join at meshoptical dot com.</p>
+  </div>
+  <a id="backButton" class="role-tile back-button back-button-role" href="/careers">&larr; Back</a>
+</div>
+
+
+  
+<!-- lasers disabled on role pages -->
+
+
+  <script>
+    /********************************************************
+     * Menu and View Functions
+     ********************************************************/
+    let hideTimeout;
+    function toggleMenu() {
+      var menuContainer = document.getElementById("menuContainer");
+      menuContainer.classList.toggle("active");
+    }
+
+    if (!("ontouchstart" in window)) {
+      const menuContainer = document.getElementById("menuContainer");
+      menuContainer.addEventListener("mouseenter", function() {
+        clearTimeout(hideTimeout);
+        this.classList.add("active");
+      });
+      menuContainer.addEventListener("mouseleave", function() {
+        hideTimeout = setTimeout(() => {
+          this.classList.remove("active");
+        }, 500);
+      });
+    }
+    document.addEventListener("click", function(event) {
+      const menuContainer = document.getElementById("menuContainer");
+      if (!menuContainer.contains(event.target)) {
+        menuContainer.classList.remove("active");
+      }
+    });
+
+    document.getElementById("lightModeButton").addEventListener("click", function(e) {
+      e.preventDefault();
+      document.getElementById("menuContainer").classList.remove("active");
+      if (document.body.classList.contains("light-mode")) {
+        document.body.classList.remove("light-mode");
+        this.textContent = "💡";
+      } else {
+        document.body.classList.add("light-mode");
+        this.textContent = "🌑";
+      }
+    });
+  </script>
+
+  <!-- Author signature, Inspect > Console -->
+  <script>
+    (function(){
+      const _0x1f3 = "Mj csy'vi viehmrk xlmw, tpiewi gsrwmhiv liptmrk yw fymph xli qeglmriw xlex qeoi epksvxmlqmgeppc kirivexih hsgyqirxw pmoi xlmw tswwmfpi";
+      function _0x2b7(_0x123) {
+        const _0x456 = _0x123 % 26;
+        let _0x789 = "";
+        for (let _0xabc = 0; _0xabc < _0x1f3.length; _0xabc++) {
+          let _0xdef = _0x1f3.charCodeAt(_0xabc);
+          if (_0xdef >= 65 && _0xdef <= 90) {
+            _0x789 += String.fromCharCode((( _0xdef - 65 - _0x456 + 26) % 26) + 65);
+          } else if (_0xdef >= 97 && _0xdef <= 122) {
+            _0x789 += String.fromCharCode((( _0xdef - 97 - _0x456 + 26) % 26) + 97);
+          } else {
+            _0x789 += _0x1f3.charAt(_0xabc);
+          }
+        }
+        return _0x789;
+      }
+      window._0x2b7 = _0x2b7;
+    })();
+  </script>
+
+</body>
+</html>
